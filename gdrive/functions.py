@@ -18,12 +18,16 @@ def GDrive():
     return GoogleDrive(gauth)
 
 def idof(title,root='root'):
-    ido = root    
-    for t in title:      
-      ido = next(i['id'] for i in 
+    try:
+      ido = root    
+      for t in title:      
+        print(t,ido)
+        ido = next(i['id'] for i in 
                GDrive().ListFile({'q': "'{}' in parents and trashed=false".format(ido)}).GetList() 
                if i['title'].lower() == t.lower())
-    return ido
+      return ido
+    except StopIteration:
+      raise FileNotFoundError('gdrive file "{}" not found at folder "{}"'.format('/'.join(title),root))
 
 def get_csv(name,root='root'):
     ido = idof(name.split('/'),root=root)
