@@ -17,16 +17,16 @@ def GDrive():
     gauth.credentials = GoogleCredentials.get_application_default()
     return GoogleDrive(gauth)
 
-def idof(title):
-    ido = 'root'    
+def idof(title,root='root'):
+    ido = root    
     for t in title:      
       ido = next(i['id'] for i in 
                GDrive().ListFile({'q': "'{}' in parents and trashed=false".format(ido)}).GetList() 
                if i['title'].lower() == t.lower())
     return ido
 
-def get_csv(name):
-    ido = idof(name.split('/'))
+def get_csv(name,root='root'):
+    ido = idof(name.split('/'),root=root)
     f = GDrive().CreateFile({'id':ido})  
     f.FetchContent()
     compression = {'.bz2':'bz2', '.bz':'bz2', '.gz':'gzip', '.zip':'zip'}\
