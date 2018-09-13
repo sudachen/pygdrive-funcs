@@ -21,7 +21,6 @@ def idof(title,root='root'):
     try:
       ido = root    
       for t in title:      
-        print(t,ido)
         ido = next(i['id'] for i in 
                GDrive().ListFile({'q': "'{}' in parents and trashed=false".format(ido)}).GetList() 
                if i['title'].lower() == t.lower())
