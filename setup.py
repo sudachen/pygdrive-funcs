@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-   name='sudachen-gdrive',
+   name='gdrive',
    version='1.1',
    description='google colab GDrive interface',
    author='Alexey Sudachen',
