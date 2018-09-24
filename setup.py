@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
    name='gdrive',
-   version='1.5',
+   version='1.6',
    description='google colab GDrive interface',
    author='Alexey Sudachen',
    author_email='alexey.sudachen@vacasa.com',
