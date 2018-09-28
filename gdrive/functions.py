@@ -12,10 +12,20 @@ def GDrive():
     from google.colab import auth
     from oauth2client.client import GoogleCredentials
 
-    auth.authenticate_user()
-    gauth = GoogleAuth()
-    gauth.credentials = GoogleCredentials.get_application_default()
-    return GoogleDrive(gauth)
+    class _Auth(GoogleAuth):
+        def _auth(self):
+            auth.authenticate_user()
+            self.credentials = GoogleCredentials.get_application_default()
+        def __init__(self):
+            GoogleAuth.__init__(self)
+            self._auth()
+        def ServiceAuth(self):
+            self._auth()
+        def LocalWebserverAuth(self):
+            self._auth()
+
+    return GoogleDrive(_Auth())
+
 
 def idof(title, root='root'):
     try:
